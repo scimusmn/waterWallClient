@@ -1,26 +1,30 @@
 #!/bin/bash
 
-echo "Clone the application"
+
+echo "\nInstalling node:"
+
+sudo apt-get install --no-install-recommends xserver-xorg xinit xserver-xorg-video-fbdev xserver-xorg-video-fbturbo libxss1 libgconf-2-4 libnss3 git nodejs libgtk2.0-0 libxtst6
+
+curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
+
+echo "\nClone the application"
 
 git clone https://github.com/scimusmn/waterWallClient.git
 
 cd waterWallClient
 
-echo "Init the submodules:"
+echo "\nInit the submodules:"
 
 git submodule init
+
 git submodule update
 
-echo "Adding Adafruit Declarations and installing node:"
-
-curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -
-
-sudo apt-get install node
-
-#echo "Creating Device Tree Blob for halt signal on GPIO25:"
-
-#sudo dtc -I dts -O dtb -o /boot/dt-blob.bin my-blob.dts
-
-echo "Installing dependencies for application:"
+echo "\nInstalling dependencies for application:"
 
 npm i
+
+echo "\nConfiguring"
+
+cd piFig
+
+sudo node installPi.js
