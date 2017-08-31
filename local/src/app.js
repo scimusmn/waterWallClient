@@ -24,8 +24,9 @@ obtain(['rpio'], (hw)=> {
 
     setInterval(activateNext, 500);
 
-    document.onkeypress = (e)=> {
-      if (e.key == ' ') console.log('Space pressed');
+    document.onkeyup = (e)=> {
+      var electron = require('electron');
+      if (e.which == 27) electron.remote.process.exit();
     };
 
   };
