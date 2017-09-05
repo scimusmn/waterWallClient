@@ -38,10 +38,7 @@ obtain(['fs', 'rpio'], (fs, rpio)=> {
           setTimeout(()=> {
             out.state = rpio.LOW;
             rpio.write(out.pin, rpio.LOW);
-            if (num == 3) {
-              console.log(Date.now() - stamp);
-            }
-          }, length - 1);
+          }, length - 5);
         }, delay);
       }
     };
