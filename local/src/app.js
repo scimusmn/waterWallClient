@@ -79,6 +79,10 @@ obtain(['./src/wallControl.js'], ({ valves })=> {
 
   var count = 0;
 
+  window.onbeforeunload = ()=>{
+    valves.allOff();
+  }
+
   exports.app.start = ()=> {
     console.log('started');
 
