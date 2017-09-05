@@ -38,7 +38,7 @@ obtain(['fs', 'rpio'], (fs, rpio)=> {
           setTimeout(()=> {
             out.state = rpio.LOW;
             rpio.write(out.pin, rpio.LOW);
-          });
+          }, _this.pixel.height);
         }, delay);
       }
     };
