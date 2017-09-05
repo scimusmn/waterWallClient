@@ -35,7 +35,6 @@ obtain(['fs', 'rpio'], (fs, rpio)=> {
         setTimeout(()=> {
           out.state = rpio.HIGH;
           rpio.write(out.pin, out.state);
-          console.log('Writing ' + out.pin + ' high')
           setTimeout(()=> {
             out.state = rpio.LOW;
             rpio.write(out.pin, out.state);
