@@ -35,10 +35,11 @@ obtain(['fs', 'rpio'], (fs, rpio)=> {
         setTimeout(()=> {
           out.state = rpio.HIGH;
           rpio.write(out.pin, out.state);
-          console.log('Wrote pin' + out.pin);
+          if (num == 9) console.log('Set pin' + out.pin);
           setTimeout(()=> {
             out.state = rpio.LOW;
             rpio.write(out.pin, out.state);
+            if (num == 9) console.log('Reset pin' + out.pin);
           });
         }, delay);
       }
