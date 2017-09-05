@@ -7,7 +7,7 @@ obtain(['fs', 'rpio'], (fs, rpio)=> {
     var _this = this;
 
     this.timeOffset = 0;
-    this.pixel = { width: 2, height: 500 };
+    this.pixel = { width: 2, height: 200 };
 
     rpio.init({ mapping: 'gpio' });
 
