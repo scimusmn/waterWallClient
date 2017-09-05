@@ -35,7 +35,7 @@ obtain(['fs', 'rpio'], (fs, rpio)=> {
         setTimeout(()=> {
           out.state = rpio.HIGH;
           rpio.write(out.pin, out.state);
-          if (num == 9) console.log('Set pin' + out.pin);
+          if (num == 9) console.log('Set pin ' + out.pin);
           setTimeout(()=> {
             out.state = rpio.LOW;
             rpio.write(out.pin, out.state);
@@ -57,7 +57,7 @@ obtain(['fs', 'rpio'], (fs, rpio)=> {
     };
 
     _this.drawRaster = (data, stamp)=> {
-      for (var i = 0; i < data.length; i++) {
+      for (var i = data.length - 1; i >= 0; i--) {
         _this.rasterRow(data, stamp + (data.length - (i + 1)) * _this.pixel.height);
       }
     };
