@@ -35,10 +35,11 @@ obtain(['fs', 'rpio'], (fs, rpio)=> {
         setTimeout(()=> {
           out.state = rpio.HIGH;
           rpio.write(out.pin, rpio.HIGH);
+          console.log(out.scheduled - Date.now());
           setTimeout(()=> {
             out.state = rpio.LOW;
             rpio.write(out.pin, rpio.LOW);
-          }, length-1);
+          }, length - 1);
         }, delay);
       }
     };
