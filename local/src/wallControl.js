@@ -47,8 +47,9 @@ obtain(['fs', 'rpio'], (fs, rpio)=> {
       if (data.length == outs.length / _this.pixel.width) {
         for (var i = 0; i < data.length; i++) {
           if (data[i]) {
-            _this.set(2 * i, _this.pixel.height, stamp);
-            _this.set(2 * i + 1, _this.pixel.height, stamp);
+            for (var j = 0; j < _this.pixel.width; j++) {
+              _this.set(_this.pixel.width * i + j, _this.pixel.height, stamp);
+            }
           }
         }
       }
