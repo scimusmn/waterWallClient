@@ -27,11 +27,17 @@ obtain(['fs', 'rpio'], (fs, rpio)=> {
       });
     };
 
+    _this.allOff = ()=> {
+      for (var i = 0; i < outs.length; i++) {
+        rpio.write(outs[i].pin, rpio.LOW);
+      }
+    };
+
     _this.set = (num, length, stamp)=> {
       let out = outs[num];
       let delay = Math.max(0, stamp - Date.now());
       if (!out.state && stamp > out.scheduled) {
-        if (stamp > out.scheduled) out.scheduled = stamp + length;
+        if (stamp > out.scheduled) out.scheduled = stamp + length - 5;
         setTimeout(()=> {
           out.state = rpio.HIGH;
           rpio.write(out.pin, rpio.HIGH);
