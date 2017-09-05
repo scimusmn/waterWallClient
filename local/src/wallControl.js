@@ -36,7 +36,7 @@ obtain(['fs', 'rpio'], (fs, rpio)=> {
     _this.set = (num, length, stamp)=> {
       let out = outs[num];
       let delay = Math.max(0, stamp - Date.now());
-      if (!out.state && stamp > out.scheduled) {
+      if (stamp > out.scheduled) {
         if (stamp > out.scheduled) out.scheduled = stamp + length - 5;
         setTimeout(()=> {
           out.state = rpio.HIGH;
