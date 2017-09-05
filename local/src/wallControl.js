@@ -38,7 +38,7 @@ obtain(['fs', 'rpio'], (fs, rpio)=> {
           setTimeout(()=> {
             out.state = rpio.LOW;
             rpio.write(out.pin, rpio.LOW);
-          }, _this.pixel.height);
+          }, length);
         }, delay);
       }
     };
@@ -57,7 +57,7 @@ obtain(['fs', 'rpio'], (fs, rpio)=> {
 
     _this.drawRaster = (data, stamp)=> {
       for (var i = data.length - 1; i >= 0; i--) {
-        _this.rasterRow(data[i], stamp + (data.length - (i + 1)) * _this.pixel.height);
+        _this.rasterRow(data[i], stamp + ((data.length - (i + 1)) * _this.pixel.height));
       }
     };
 
