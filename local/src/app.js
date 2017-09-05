@@ -28,7 +28,7 @@ obtain(['./src/wallControl.js'], ({ valves })=> {
     };
 
     setInterval(()=> {
-      valves.drawRaster(test, Date.now()+50);
+      valves.drawRaster(test, Date.now() + 50);
     }, (test.length + 1) * valves.pixel.height);
 
   };
