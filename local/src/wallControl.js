@@ -7,7 +7,7 @@ obtain(['fs', 'rpio'], (fs, rpio)=> {
     var _this = this;
 
     this.timeOffset = 0;
-    this.pixel = { width: 2, height: 50 };
+    this.pixel = { width: 2, height: 200 };
 
     rpio.init({ mapping: 'gpio' });
 
@@ -35,6 +35,7 @@ obtain(['fs', 'rpio'], (fs, rpio)=> {
         setTimeout(()=> {
           out.state = rpio.HIGH;
           rpio.write(out.pin, out.state);
+          console.log('Wrote pin' + out.pin);
           setTimeout(()=> {
             out.state = rpio.LOW;
             rpio.write(out.pin, out.state);
