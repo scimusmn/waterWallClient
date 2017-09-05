@@ -52,7 +52,7 @@ obtain(['./src/wallControl.js'], ({ valves })=> {
 
   var count = 0;
 
-  valves.pixels.width =1;
+  valves.pixel.width = 1;
 
   exports.app.start = ()=> {
     console.log('started');
