@@ -1,7 +1,9 @@
 'use strict';
 
-obtain(['./src/wallControl.js'], ({ valves })=> {
+obtain(['./src/wallControl.js', './src/commandInterface.js'], ({ valves }, { MuseControl })=> {
   exports.app = {};
+
+  var control = new MuseControl('172.17.68.120');
 
   var _ = 1;
 
@@ -107,6 +109,29 @@ obtain(['./src/wallControl.js'], ({ valves })=> {
   };
 
   exports.app.start = ()=> {
+    control.addListener('drawRow', (pack)=> {
+      valves.rasterRow(pack.data, pack.stamp - control.timeOffset);
+    });
+
+    control.addListener('pixelWidth', (wid)=> {
+      valves.pixel.width = wid;
+    });
+
+    control.addListener('pixelHeight', (hgt)=> {
+      valves.pixel.height = hgt;
+    });
+
+    control.connect();
+
+    let defaultDraw = setInterval(()=> {
+      valves.drawRaster(test, Date.now() + 50);
+    }, (test.length + 10) * valves.pixel.height);
+
+    control.onConnect = ()=> {
+      clearInterval(defaultDraw);
+      control.send({ _id: 0 });
+    };
+
     console.log('started');
 
     document.onkeyup = (e)=> {
@@ -116,10 +141,6 @@ obtain(['./src/wallControl.js'], ({ valves })=> {
         electron.remote.process.exit();
       }
     };
-
-    setInterval(()=> {
-      valves.drawRaster(test, Date.now() + 50);
-    }, (test.length + 10) * valves.pixel.height);
 
   };
 

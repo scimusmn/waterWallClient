@@ -17,16 +17,6 @@ obtain(['fs', 'rpio'], (fs, rpio)=> {
       rpio.open(outs[i].pin, rpio.OUTPUT, rpio.LOW);
     }
 
-    _this.synchronize = ()=> {
-      var data = { time: Date.now() };
-      post('http://192.168.0.1/timeSync', data).then((resp)=> {
-        this.timeOffset = (2 * resp.serverTime - (data.time + Date.now())) / 2;
-      }, (error)=> {
-        console.log('Could not sync with server');
-        this.timeOffset = 0;
-      });
-    };
-
     _this.allOff = ()=> {
       for (var i = 0; i < outs.length; i++) {
         rpio.write(outs[i].pin, rpio.LOW);
