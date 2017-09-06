@@ -57,9 +57,7 @@ obtain(['µ/websocket.js', 'fs'], ({ valves })=> {
           };
 
           _this.send = function(msgObj) {
-            console.log(msgObj);
-            JSON.stringify(msgObj);
-            ws.send(msgObj);
+            ws.send(JSON.stringify(msgObj););
           };
 
           _this.synchronize();
