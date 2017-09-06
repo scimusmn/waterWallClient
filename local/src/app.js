@@ -113,6 +113,10 @@ obtain(['./src/wallControl.js', './src/commandInterface.js'], ({ valves }, { Mus
       valves.rasterRow(pack.data, pack.stamp - control.timeOffset);
     });
 
+    control.addListener('drawRaster', (pack)=> {
+      valves.drawRaster(pack.data, pack.stamp - control.timeOffset);
+    });
+
     control.addListener('pixelWidth', (wid)=> {
       valves.pixel.width = wid;
     });
