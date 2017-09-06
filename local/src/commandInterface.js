@@ -44,14 +44,13 @@ obtain(['µ/websocket.js', 'fs'], ({ valves })=> {
           _this.onConnect();
           ws.onmessage = function(evt) {
             var data = JSON.parse(evt.data);
-            _this.onMessage(data);
             for (var key in data) {
               if (data.hasOwnProperty(key)) {
                 if (key == 'serverTime') {
-                  _this.timeOffset = (2 * resp.serverTime - (_this.syncTime + Date.now())) / 2;
+                  _this.timeOffset = (2 * data[key] - (_this.syncTime + Date.now())) / 2;
                   let serTime = new Date(Date.now() + _this.timeOffset);
                   console.log('Server time is ' + serTime.toLocaleString());
-                } else if (key in listeners) listeners[key](data[key]);
+                } else if (key in listeners) listeners[key](data[key], data);
               }
             }
           };
