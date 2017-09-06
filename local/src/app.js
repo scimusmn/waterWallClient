@@ -128,6 +128,7 @@ obtain(['./src/wallControl.js', './src/commandInterface.js'], ({ valves }, { Mus
     }, (test.length + 10) * valves.pixel.height);
 
     control.onConnect = ()=> {
+      console.log('connected to server');
       clearInterval(defaultDraw);
       control.send({ _id: 0 });
     };
