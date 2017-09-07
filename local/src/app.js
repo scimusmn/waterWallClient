@@ -123,6 +123,7 @@ obtain(['./src/wallControl.js', './src/commandInterface.js'], ({ valves }, { Mus
 
     control.addListener('pixelHeight', (hgt)=> {
       valves.pixel.height = hgt;
+      console.log('Pixel height set to ' + valves.pixel.height);
     });
 
     control.connect();
