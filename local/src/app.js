@@ -135,11 +135,11 @@ obtain(['./src/wallControl.js', './src/commandInterface.js', 'fs'], ({ valves },
     control.onConnect = ()=> {
       console.log('connected to server');
       clearInterval(defaultDraw);
-      var confFile = '/boot/rainWallConf.json'
+      var confFile = '/boot/rainWallConf.json';
       if (fs.existsSync(confFile)) {
-        let data = fs.readFileSync(confDir); //file exists, get the contents
-        conf = JSON.parse(data);
-        control.send({ _id: data._id });
+        let data = fs.readFileSync(confFile); //file exists, get the contents
+        var conf = JSON.parse(data);
+        control.send({ _id: conf._id });
       } else control.send({ _id: 0 });
     };
 
