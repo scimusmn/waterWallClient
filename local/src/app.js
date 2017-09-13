@@ -1,9 +1,11 @@
 'use strict';
 
-obtain(['./src/wallControl.js', './src/commandInterface.js', 'fs'], ({ valves }, { MuseControl }, fs)=> {
+obtain(['./src/wallControl.js', './src/commandInterface.js', 'fs', '../piFig/src/utils.js'], ({ valves }, { MuseControl }, fs, utils)=> {
   exports.app = {};
 
   var control = new MuseControl('172.17.68.120');
+
+  console.log(utils.getIpAddress());
 
   var _ = 1;
 
