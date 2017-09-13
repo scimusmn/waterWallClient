@@ -1,6 +1,6 @@
 'use strict';
 
-obtain(['./src/wallControl.js', './src/commandInterface.js'], ({ valves }, { MuseControl })=> {
+obtain(['./src/wallControl.js', './src/commandInterface.js', 'fs'], ({ valves }, { MuseControl }, fs)=> {
   exports.app = {};
 
   var control = new MuseControl('172.17.68.120');
@@ -135,7 +135,12 @@ obtain(['./src/wallControl.js', './src/commandInterface.js'], ({ valves }, { Mus
     control.onConnect = ()=> {
       console.log('connected to server');
       clearInterval(defaultDraw);
-      control.send({ _id: 0 });
+      var confFile = '/boot/rainWallConf.json'
+      if (fs.existsSync(confFile)) {
+        let data = fs.readFileSync(confDir); //file exists, get the contents
+        conf = JSON.parse(data);
+        control.send({ _id: data._id });
+      } else control.send({ _id: 0 });
     };
 
     console.log('started');
