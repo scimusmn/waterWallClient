@@ -143,7 +143,7 @@ obtain(['./src/wallControl.js', 'µ/commandClient.js', 'fs', '../piFig/src/utils
       if (fs.existsSync(confFile)) {
         let data = fs.readFileSync(confFile); //file exists, get the contents
         var conf = JSON.parse(data);
-        control.send({ _id: conf._id, ip: utils.getIpAddress()[0] });
+        control.send({ _id: conf._id, ip: utils.getIpAddress() });
       } else control.send({ _id: 0 });
     };
 
