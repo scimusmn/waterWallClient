@@ -5,7 +5,7 @@ obtain(['./src/wallControl.js', 'µ/commandClient.js', 'fs', '../piFig/src/utils
 
   var control = new MuseControl('172.17.68.120');
 
-  console.log(utils.getIpAddress());
+  //console.log(utils.getIpAddress());
 
   var _ = 1;
 
