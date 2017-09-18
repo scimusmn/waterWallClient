@@ -1,6 +1,6 @@
 'use strict';
 
-obtain(['./src/wallControl.js', './src/commandInterface.js', 'fs', '../piFig/src/utils.js'], ({ valves }, { MuseControl }, fs, utils)=> {
+obtain(['./src/wallControl.js', 'µ/commandClient.js', 'fs', '../piFig/src/utils.js'], ({ valves }, { MuseControl }, fs, utils)=> {
   exports.app = {};
 
   var control = new MuseControl('172.17.68.120');
@@ -130,6 +130,8 @@ obtain(['./src/wallControl.js', './src/commandInterface.js', 'fs', '../piFig/src
 
     control.connect();
 
+    valves.pixel.height = 60;
+
     let defaultDraw = setInterval(()=> {
       valves.drawRaster(test, Date.now() + 50);
     }, (test.length + 10) * valves.pixel.height);
@@ -141,7 +143,7 @@ obtain(['./src/wallControl.js', './src/commandInterface.js', 'fs', '../piFig/src
       if (fs.existsSync(confFile)) {
         let data = fs.readFileSync(confFile); //file exists, get the contents
         var conf = JSON.parse(data);
-        control.send({ _id: conf._id });
+        control.send({ _id: conf._id, ip: utils.getIpAddress()[0] });
       } else control.send({ _id: 0 });
     };
 

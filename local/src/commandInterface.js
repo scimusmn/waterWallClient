@@ -1,4 +1,4 @@
-obtain(['µ/websocket.js', 'fs'], ({ valves })=> {
+obtain([], ()=> {
   exports.MuseControl = function(address) {
     var _this = this;
 
