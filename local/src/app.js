@@ -17,7 +17,7 @@ var obtains = [
 obtain(obtains, ({ valves }, { MuseControl }, utils, { config })=> {
   exports.app = {};
 
-  var control = new MuseControl('172.17.68.120');
+  var control = new MuseControl('172.17.69.76');
 
   //console.log(utils.getIpAddress());
 
