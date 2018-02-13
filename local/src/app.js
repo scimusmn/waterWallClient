@@ -1,6 +1,20 @@
 'use strict';
 
-obtain(['./src/wallControl.js', 'µ/commandClient.js', 'fs', '../piFig/src/utils.js'], ({ valves }, { MuseControl }, fs, utils)=> {
+var appData = '../ForBoot/appData';
+
+if (fs.existsSync('/boot/appData/config.js')) {
+  console.log('on pi');
+  appData = '/boot/appData';
+}
+
+var obtains = [
+  './src/wallControl.js',
+  'µ/commandClient.js',
+  '../piFig/src/utils.js',
+  `${appData}/config.js`,
+];
+
+obtain(obtains, ({ valves }, { MuseControl }, utils, { config })=> {
   exports.app = {};
 
   var control = new MuseControl('172.17.68.120');
@@ -83,27 +97,6 @@ obtain(['./src/wallControl.js', 'µ/commandClient.js', 'fs', '../piFig/src/utils
               [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
   ];
 
-  /*var test = [[_, 0, 0, 0, _, 0, 0, _, _, 0, 0, 2, 2, 2, 0, 0, 2, 0, 0, 0, 2, 2, 2, 0],
-              [_, 0, 0, 0, _, 0, _, 0, 0, _, 0, 2, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2],
-              [_, 0, 0, 0, _, 0, _, 0, 0, _, 0, 2, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2],
-              [_, 0, 0, 0, _, 0, _, 0, 0, _, 0, 2, 2, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 2],
-              [_, 0, _, 0, _, 0, _, 0, 0, _, 0, 2, 0, 2, 0, 0, 2, 0, 0, 0, 2, 0, 0, 2],
-              [_, _, 0, _, _, 0, _, 0, 0, _, 0, 2, 0, 0, 2, 0, 2, 0, 0, 0, 2, 0, 0, 2],
-              [_, 0, 0, 0, _, 0, 0, _, _, 0, 0, 2, 0, 0, 2, 0, 2, 2, 2, 0, 2, 2, 2, 0],
-              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-
-              //////////////////////////////////////
-              [_, 0, 0, _, 0, _, _, _, _, 0, _, 0, 0, 0, 0, _, 0, 0, 0, 0, 0, _, _, 0],
-              [_, 0, 0, _, 0, _, 0, 0, 0, 0, _, 0, 0, 0, 0, _, 0, 0, 0, 0, _, 0, 0, 1],
-              [_, 0, 0, _, 0, _, 0, 0, 0, 0, _, 0, 0, 0, 0, _, 0, 0, 0, 0, _, 0, 0, 1],
-              [_, _, _, _, 0, _, _, _, 0, 0, _, 0, 0, 0, 0, _, 0, 0, 0, 0, _, 0, 0, 1],
-              [_, 0, 0, _, 0, _, 0, 0, 0, 0, _, 0, 0, 0, 0, _, 0, 0, 0, 0, _, 0, 0, 1],
-              [_, 0, 0, _, 0, _, 0, 0, 0, 0, _, 0, 0, 0, 0, _, 0, 0, 0, 0, _, 0, 0, 1],
-              [_, 0, 0, _, 0, _, _, _, _, 0, _, _, _, _, 0, _, _, _, _, 0, 0, _, _, 0],
-              [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
-
-  ];*/
-
   var count = 0;
 
   window.onbeforeunload = ()=> {
@@ -139,12 +132,7 @@ obtain(['./src/wallControl.js', 'µ/commandClient.js', 'fs', '../piFig/src/utils
     control.onConnect = ()=> {
       console.log('connected to server');
       clearInterval(defaultDraw);
-      var confFile = '/boot/rainWallConf.json';
-      if (fs.existsSync(confFile)) {
-        let data = fs.readFileSync(confFile); //file exists, get the contents
-        var conf = JSON.parse(data);
-        control.send({ _id: conf._id, ip: utils.getIpAddress() });
-      } else control.send({ _id: 0, ip: utils.getIpAddress() });
+      control.send({ _id: config._id, ip: utils.getIpAddress() });
     };
 
     console.log('started');
