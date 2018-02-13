@@ -2,6 +2,8 @@
 
 var appData = '../ForBoot/appData';
 
+var fs = require('fs');
+
 if (fs.existsSync('/boot/appData/config.js')) {
   console.log('on pi');
   appData = '/boot/appData';
