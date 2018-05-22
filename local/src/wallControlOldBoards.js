@@ -1,10 +1,9 @@
 obtain(['fs', 'rpio'], (fs, rpio)=> {
   //exports.valves = {};
 
-  //var outs = [2, 3, 4, 17, 18, 27, 22, 23, 24, 10, 9, 25, 11, 8, 7, 0, 1, 5, 6, 12, 13, 19, 16, 26];
-  var outs = [2, 9, 6, 3, 25, 12, 4, 11, 13, 17, 8, 19, 18, 7, 16, 27, 0, 26, 22, 1, 20, 10, 5, 21];
+  var outs = [2, 3, 4, 17, 18, 27, 22, 23, 24, 10, 9, 25, 11, 8, 7, 0, 1, 5, 6, 12, 13, 19, 16, 26];
 
-  var valves = function () {
+  var valves = function() {
     var _this = this;
 
     this.timeOffset = 0;
@@ -22,11 +21,6 @@ obtain(['fs', 'rpio'], (fs, rpio)=> {
       for (var i = 0; i < outs.length; i++) {
         rpio.write(outs[i].pin, rpio.LOW);
       }
-    };
-
-    _this.force = (num, state)=> {
-      let out = outs[num];
-      rpio.write(out.pin, state ? rpio.HIGH : rpio.LOW);
     };
 
     _this.set = (num, length, stamp)=> {

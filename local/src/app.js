@@ -127,23 +127,31 @@ obtain(obtains, ({ valves }, { MuseControl }, utils, { config })=> {
 
     valves.pixel.height = 60;
 
-    let defaultDraw = setInterval(()=> {
+    /*let defaultDraw = setInterval(()=> {
       valves.drawRaster(test, Date.now() + 50);
-    }, (test.length + 10) * valves.pixel.height);
+    }, (test.length + 10) * valves.pixel.height);*/
 
     control.onConnect = ()=> {
       console.log('connected to server');
-      clearInterval(defaultDraw);
+      //clearInterval(defaultDraw);
       control.send({ _id: config._id, ip: utils.getIpAddress() });
     };
 
     console.log('started');
 
+    document.onkeydown = (e)=> {
+      let key = e.char - 65;
+      console.log(key);
+      if (key >= 0 && key < 24) {
+        valves.force(key, 1);
+      }
+    };
+
     document.onkeyup = (e)=> {
-      var electron = require('electron');
-      if (e.which == 27) {
-        valves.allOff();
-        electron.remote.process.exit();
+      let key = e.char - 65;
+      console.log(key);
+      if (key >= 0 && key < 24) {
+        valves.force(key, 1);
       }
     };
 
