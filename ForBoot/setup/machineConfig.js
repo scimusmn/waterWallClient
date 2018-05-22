@@ -7,12 +7,12 @@ exports.config = {
     },*/
     autostart: true,
     gitWatch: true,
-    /*softShutdown: {
+    softShutdown: {
       monitorPin: 24,
-      controlPin: 25,
+      controlPin: 23,
       delayTime: 1000,
     },
-    wifi: {
+    /*wifi: {
       ssid: 'SensorServer',
       password: 'defaultPass',
     },*/
