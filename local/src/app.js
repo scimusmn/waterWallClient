@@ -140,7 +140,7 @@ obtain(obtains, ({ valves }, { MuseControl }, utils, { config })=> {
     console.log('started');
 
     document.onkeydown = (e)=> {
-      let key = e.key.charCodeAt(0);
+      let key = e.key.charCodeAt(0) - 97;
       console.log(key);
       if (key >= 0 && key < 24) {
         valves.force(key, 1);
@@ -148,7 +148,7 @@ obtain(obtains, ({ valves }, { MuseControl }, utils, { config })=> {
     };
 
     document.onkeyup = (e)=> {
-      let key = e.key.charCodeAt(0);
+      let key = e.key.charCodeAt(0) - 97;
       console.log(key);
       if (key >= 0 && key < 24) {
         valves.force(key, 0);
